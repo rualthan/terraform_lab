@@ -43,7 +43,9 @@ data "aws_ami" "ubuntu_22_04" {
 # Create the master node
 resource "aws_instance" "jenkins_tomcat" {
   ami                    = data.aws_ami.ubuntu_22_04.id
-  instance_type          = "t2.medium"
+  # You are like to need a bigger instance
+  # I leave it as is to avoid surprising you
+  instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.jenkins_tomcat_sg.id]
   key_name               = aws_key_pair.my_key.key_name
   user_data              = file("setup.sh")
